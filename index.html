@@ -349,6 +349,8 @@
       font-size: 0.85em;
       padding: 1px 6px;
       border-radius: 3px;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     /* Point card */
@@ -466,6 +468,7 @@
       color: var(--cover-mid);
       width: 18px;
     }
+    .option-text { min-width: 0; flex: 1; overflow-wrap: anywhere; }
     .option.correct .option-letter { color: var(--correct); }
     .option.incorrect .option-letter { color: var(--incorrect); }
 
