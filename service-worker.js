@@ -1,5 +1,5 @@
 // AI Code Reader Service Worker
-const CACHE_NAME = 'ai-code-reader-v1';
+const CACHE_NAME = 'ai-code-reader-v2';
 const ASSETS = [
   './',
   './index.html',

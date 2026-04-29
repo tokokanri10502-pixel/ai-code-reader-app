@@ -652,9 +652,6 @@
     <!-- TOC -->
     <div id="toc-page" class="inner-page">
       <h2 class="page-heading">📋 もくじ</h2>
-      <div class="toc-intro">
-        各回で <strong>解説 → 5問の選択式クイズ</strong> を進めていきます。
-      </div>
       <ul class="toc-list" id="toc-list"></ul>
     </div>
 
@@ -972,14 +969,1143 @@ const days = [
       }
     ]
   },
-  { id: 3, title: "CSSの:root変数", available: false },
-  { id: 4, title: "CSSのセレクタと基本プロパティ", available: false },
-  { id: 5, title: "CSSのレイアウト（flex）", available: false },
-  { id: 6, title: "CSSの装飾（gradient、shadow）", available: false },
-  { id: 7, title: "CSSの疑似要素（::before, ::after）", available: false },
-  { id: 8, title: "JavaScript①関数とは", available: false },
-  { id: 9, title: "JavaScript②DOM操作", available: false },
-  { id: 10, title: "総まとめ＋実際の画面との対応づけ", available: false }
+  {
+    id: 3,
+    title: "CSSの:root変数",
+    available: true,
+    body: `
+      <div class="day-label">Day 3 / 10</div>
+      <h2 class="entry-title">CSSの:root変数</h2>
+
+      <h3 class="section-heading">📚 今日のテーマ</h3>
+      <p class="description">
+        Day3からはCSS（見た目を決める言語）に入ります。CSSの先頭にある <code class="inline">:root { ... }</code> は、<strong>このページで使う色や設定をまとめた「色見本帳」</strong>。一度ここに名前をつけておけば、後からは <code class="inline">var(--名前)</code> で呼び出すだけで使えます。
+      </p>
+
+      <h3 class="section-heading">📝 今日読むコード</h3>
+      <div class="code-block"><span class="tag">:root</span> {
+  <span class="attr">--paper</span>: <span class="str">#FDF6E3</span>;
+  <span class="attr">--paper-dark</span>: <span class="str">#F0E8CC</span>;
+  <span class="attr">--cover-dark</span>: <span class="str">#1E0F08</span>;
+  <span class="attr">--cover</span>: <span class="str">#2C1810</span>;
+  <span class="attr">--gold</span>: <span class="str">#B8860B</span>;
+  <span class="attr">--gold-light</span>: <span class="str">#DAA520</span>;
+  <span class="attr">--text</span>: <span class="str">#2A2A2A</span>;
+  <span class="attr">--line-color</span>: <span class="str">rgba(100, 149, 237, 0.22)</span>;
+}
+
+<span class="comment">/* 使うとき */</span>
+<span class="tag">.cover-title</span> {
+  <span class="attr">color</span>: <span class="str">var(--gold-pale)</span>;
+}</div>
+
+      <h3 class="section-heading">💡 ポイント解説</h3>
+
+      <div class="point-card">
+        <div class="point-title">1. :root は「ページ全体の設定の置き場」</div>
+        <div class="point-body">
+          <code class="inline">:root</code> はページの一番外側を指す特別なセレクタ。<strong>ここに書いた変数（カスタムプロパティ）はページのどこからでも呼び出せます</strong>。色やサイズなど何度も使う値をここにまとめておくのが定番です。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">2. --名前: 値; が変数の宣言</div>
+        <div class="point-body">
+          <strong>頭にハイフン2つ（<code class="inline">--</code>）</strong>を付けるのがCSS変数のルール。<code class="inline">--gold: #B8860B;</code> なら「<code class="inline">--gold</code>という名前で <code class="inline">#B8860B</code> という色を覚えておく」という意味です。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">3. var(--名前) で呼び出す</div>
+        <div class="point-body">
+          使うときは <code class="inline">color: var(--gold);</code> のように <code class="inline">var()</code> で囲みます。<strong>「金色の絵の具を取って」と指差すような感覚</strong>。値そのものではなく名前を書くのがポイント。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">4. 一箇所変えれば全部変わる</div>
+        <div class="point-body">
+          変数を使う最大のメリットは<strong>一括変更</strong>。<code class="inline">--gold</code> の色を変えるだけで、ページ中の「金色」を使っていた場所が全部一気に変わります。デザイン調整がとても楽になります。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">5. 色は #16進数 や rgba() で書く</div>
+        <div class="point-body">
+          <code class="inline">#FDF6E3</code> は16進数の色コード（赤・緑・青の濃さ）。<code class="inline">rgba(100, 149, 237, 0.22)</code> は<strong>R/G/B/透明度</strong>の指定で、最後の数字（0〜1）が透明度です。半透明な装飾にはrgba()が便利。
+        </div>
+      </div>
+
+      <h3 class="section-heading">🗂 まとめ：このページの主な変数</h3>
+      <table class="info-table">
+        <tr><th>変数名</th><th>役割</th></tr>
+        <tr><td>--paper</td><td>ページ用紙の色</td></tr>
+        <tr><td>--cover</td><td>表紙の濃い茶色</td></tr>
+        <tr><td>--gold / --gold-light</td><td>金色の文字・装飾</td></tr>
+        <tr><td>--text</td><td>本文の文字色</td></tr>
+        <tr><td>--line-color</td><td>罫線の色（半透明）</td></tr>
+      </table>
+
+      <p class="description" style="margin-top:14px">
+        <code class="inline">:root</code> は<strong>「このアプリの色や設定をまとめた表紙裏」</strong>のようなもの。最初に読んでおくと、後のCSSが「あ、これさっき見た色だ」と分かるようになります。
+      </p>
+    `,
+    questions: [
+      {
+        q: '<code class="inline">:root</code>セレクタについて、正しい説明はどれですか？',
+        options: [
+          "ページの一番下にある要素を指す",
+          "ページ全体（最も外側）を指す特別なセレクタで、ここに書いた変数はどこからでも使える",
+          "クラス名 root を持つ要素だけを指す",
+          "JavaScriptからしか参照できない特殊なセレクタ"
+        ],
+        answer: 1,
+        explain: "<code class='inline'>:root</code>はページの最外側を指すセレクタ。ここで宣言したカスタムプロパティはページ全体で使えます。"
+      },
+      {
+        q: 'CSS変数を宣言するときの「名前」の頭につける記号として正しいものはどれですか？',
+        options: [
+          "シャープ <code class='inline'>#</code>",
+          "ドット <code class='inline'>.</code>",
+          "ハイフン2つ <code class='inline'>--</code>",
+          "アットマーク <code class='inline'>@</code>"
+        ],
+        answer: 2,
+        explain: "CSS変数は <code class='inline'>--名前: 値;</code> の形式で宣言します。ハイフン2つが目印です。"
+      },
+      {
+        q: 'CSS変数 <code class="inline">--gold</code> を文字色として使いたいとき、正しい書き方はどれですか？',
+        options: [
+          "<code class='inline'>color: --gold;</code>",
+          "<code class='inline'>color: $gold;</code>",
+          "<code class='inline'>color: var(--gold);</code>",
+          "<code class='inline'>color: gold();</code>"
+        ],
+        answer: 2,
+        explain: "CSS変数を呼び出すときは <code class='inline'>var(--名前)</code> で囲みます。値そのものではなく名前を書くのがコツ。"
+      },
+      {
+        q: 'CSS変数を使う最大のメリットはどれですか？',
+        options: [
+          "コードが暗号化されて他人に読まれなくなる",
+          "ページの読み込み速度が大幅に上がる",
+          "1箇所の値を変えれば、その変数を使っている全ての場所が一度に変わる",
+          "JavaScriptを書かなくてもアニメーションができる"
+        ],
+        answer: 2,
+        explain: "変数の本質は「名前を一度つけて何度も使い回す」こと。値を変えると参照している全箇所が一気に変わるので、デザイン調整がとても楽になります。"
+      },
+      {
+        q: '<code class="inline">rgba(100, 149, 237, 0.22)</code>の最後の数字「0.22」は何を表していますか？',
+        options: [
+          "色の明るさ",
+          "色の濃さ（彩度）",
+          "透明度（0で透明、1で不透明）",
+          "色を使う回数"
+        ],
+        answer: 2,
+        explain: "rgba()の4番目はアルファ値（透明度）。0で完全透明、1で完全不透明。0.22は約22%の不透明度＝かなり薄い色になります。"
+      }
+    ]
+  },
+  {
+    id: 4,
+    title: "CSSのセレクタと基本プロパティ",
+    available: true,
+    body: `
+      <div class="day-label">Day 4 / 10</div>
+      <h2 class="entry-title">CSSのセレクタと基本プロパティ</h2>
+
+      <h3 class="section-heading">📚 今日のテーマ</h3>
+      <p class="description">
+        CSSは <strong>「どこに」「何を」かける</strong>かで成り立っています。「どこに」を決めるのが<strong>セレクタ</strong>、「何を」を決めるのが<strong>プロパティ：値</strong>。今日はその基本パターンを読み解きます。
+      </p>
+
+      <h3 class="section-heading">📝 今日読むコード</h3>
+      <div class="code-block"><span class="tag">body</span> {
+  <span class="attr">background</span>: <span class="str">#1a1a1a</span>;
+  <span class="attr">color</span>: <span class="str">var(--text)</span>;
+  <span class="attr">font-family</span>: <span class="str">'Noto Sans JP', sans-serif</span>;
+  <span class="attr">padding</span>: <span class="str">24px 16px 60px</span>;
+}
+
+<span class="tag">.book</span> {
+  <span class="attr">width</span>: <span class="str">100%</span>;
+  <span class="attr">max-width</span>: <span class="str">820px</span>;
+  <span class="attr">border-radius</span>: <span class="str">12px</span>;
+}
+
+<span class="tag">#cover-page</span> {
+  <span class="attr">min-height</span>: <span class="str">520px</span>;
+  <span class="attr">padding</span>: <span class="str">60px 50px</span>;
+}</div>
+
+      <h3 class="section-heading">💡 ポイント解説</h3>
+
+      <div class="point-card">
+        <div class="point-title">1. セレクタ＝「どこに当てるか」</div>
+        <div class="point-body">
+          記号で対象が決まります。<br>
+          <code class="inline">body</code>＝<strong>タグ名そのまま</strong>。<br>
+          <code class="inline">.book</code>＝<strong>ドット付きはクラス</strong>（<code class="inline">class="book"</code>に当たる）。<br>
+          <code class="inline">#cover-page</code>＝<strong>シャープ付きはID</strong>（<code class="inline">id="cover-page"</code>に当たる）。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">2. { } の中はプロパティ：値; の繰り返し</div>
+        <div class="point-body">
+          <code class="inline">背景は黒、文字色は変数の text、余白は…</code>のように、<strong>「何を : どうする ;」</strong>を1行ずつ書きます。最後のセミコロンを忘れると次の行が無視されることがあるので注意。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">3. background / color / font-family</div>
+        <div class="point-body">
+          <code class="inline">background</code>＝<strong>背景</strong>（色や画像）。<code class="inline">color</code>＝<strong>文字色</strong>。<code class="inline">font-family</code>＝<strong>使うフォント</strong>。フォントはカンマで複数指定し、<strong>左から順に試す→無ければ次へ</strong>のフォールバック方式です。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">4. padding と margin の違い</div>
+        <div class="point-body">
+          <code class="inline">padding</code>＝<strong>箱の内側の余白</strong>（中身と枠の間）。<br>
+          <code class="inline">margin</code>＝<strong>箱の外側の余白</strong>（隣の箱との間）。<br>
+          <code class="inline">padding: 24px 16px 60px</code> のように複数の値を書くと、<strong>上 / 左右 / 下</strong>の順で当たります。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">5. 単位は px / % / rem を主に使う</div>
+        <div class="point-body">
+          <code class="inline">px</code>＝<strong>絶対的な大きさ（ピクセル）</strong>。<br>
+          <code class="inline">%</code>＝<strong>親要素に対する割合</strong>（<code class="inline">width: 100%</code>は親の幅いっぱい）。<br>
+          <code class="inline">rem</code>＝<strong>ルートのフォントサイズが基準</strong>。文字サイズに連動して伸び縮みするのが特徴。
+        </div>
+      </div>
+
+      <h3 class="section-heading">🗂 まとめ：CSSの基本構造</h3>
+      <div class="tree-block">セレクタ {
+  プロパティ: 値;
+  プロパティ: 値;
+  ...
+}
+
+▼ セレクタの種類
+  body          ← タグセレクタ
+  .book         ← クラスセレクタ（複数の要素にOK）
+  #cover-page   ← IDセレクタ（1ページに1つだけ）</div>
+
+      <p class="description" style="margin-top:14px">
+        CSSはこのパターンの繰り返しでできています。<strong>「セレクタ { プロパティ：値 ; }」</strong>のリズムが分かれば、どんな長いCSSも怖くありません。
+      </p>
+    `,
+    questions: [
+      {
+        q: 'CSSのセレクタについて、正しい組み合わせはどれですか？',
+        options: [
+          "<code class='inline'>.book</code>＝ID、<code class='inline'>#cover</code>＝クラス",
+          "<code class='inline'>.book</code>＝クラス、<code class='inline'>#cover</code>＝ID",
+          "<code class='inline'>.book</code>も<code class='inline'>#cover</code>もタグセレクタ",
+          "どちらもJavaScript専用のセレクタ"
+        ],
+        answer: 1,
+        explain: "ドット <code class='inline'>.</code> はクラス、シャープ <code class='inline'>#</code> はID。クラスは何個でも、IDは1ページに1つだけ使えます。"
+      },
+      {
+        q: 'CSSの宣言ブロック <code class="inline">{ ... }</code> の中身として、正しい書き方はどれですか？',
+        options: [
+          "<code class='inline'>color = red;</code>",
+          "<code class='inline'>color: red;</code>",
+          "<code class='inline'>color -> red;</code>",
+          "<code class='inline'>color is red;</code>"
+        ],
+        answer: 1,
+        explain: "CSSは「プロパティ：値；」の形式。コロン（:）で区切り、セミコロン（;）で終わります。"
+      },
+      {
+        q: 'paddingとmarginの違いとして正しいのはどれですか？',
+        options: [
+          "padding＝外側の余白、margin＝内側の余白",
+          "padding＝内側の余白（中身と枠の間）、margin＝外側の余白（隣との間）",
+          "paddingは文字色を指定し、marginは背景色を指定する",
+          "paddingとmarginに違いはなく、どちらも同じ意味"
+        ],
+        answer: 1,
+        explain: "padding＝箱の内側（中身と枠の間）、margin＝箱の外側（隣の要素との間）。覚えるコツは「padding は中（pad＝詰め物）」「margin は外（余白の余地）」。"
+      },
+      {
+        q: '<code class="inline">width: 100%;</code>と書いたときの意味として正しいのはどれですか？',
+        options: [
+          "幅をピクセル単位で100に固定する",
+          "幅を画面の100%（画面いっぱい）に固定する",
+          "親要素の幅に対して100%（つまり親と同じ幅）",
+          "他の要素の100倍の幅にする"
+        ],
+        answer: 2,
+        explain: "<code class='inline'>%</code>は親要素の幅に対する割合。<code class='inline'>100%</code>は親いっぱいの幅です。<code class='inline'>max-width</code>と組み合わせて上限も決められます。"
+      },
+      {
+        q: 'CSSの<code class="inline">font-family: \'Noto Sans JP\', sans-serif;</code>のように複数のフォントをカンマで並べるのは何のため？',
+        options: [
+          "全てのフォントを同時に重ねて表示するため",
+          "左から順に試して、使えないものは飛ばし、最初に使えるものを採用するため",
+          "フォントをアニメーションで切り替えるため",
+          "1秒ごとにフォントが切り替わるようにするため"
+        ],
+        answer: 1,
+        explain: "font-familyの複数指定は<strong>フォールバック</strong>。「このフォントが使えればそれを、なければ次を…」と順に試します。最後に <code class='inline'>sans-serif</code> のような一般名を置くのが定石です。"
+      }
+    ]
+  },
+  {
+    id: 5,
+    title: "CSSのレイアウト（flex）",
+    available: true,
+    body: `
+      <div class="day-label">Day 5 / 10</div>
+      <h2 class="entry-title">CSSのレイアウト（flex）</h2>
+
+      <h3 class="section-heading">📚 今日のテーマ</h3>
+      <p class="description">
+        要素を<strong>横に並べたり、縦に並べたり、中央に揃えたり</strong>するのが「レイアウト」。今のWebでこれを担当する主役が <code class="inline">display: flex</code>（フレックスボックス）です。今日は flex の基本4つを読み解きます。
+      </p>
+
+      <h3 class="section-heading">📝 今日読むコード</h3>
+      <div class="code-block"><span class="tag">body</span> {
+  <span class="attr">display</span>: <span class="str">flex</span>;
+  <span class="attr">flex-direction</span>: <span class="str">column</span>;
+  <span class="attr">align-items</span>: <span class="str">center</span>;
+}
+
+<span class="tag">.toc-meta</span> {
+  <span class="attr">display</span>: <span class="str">flex</span>;
+  <span class="attr">align-items</span>: <span class="str">center</span>;
+  <span class="attr">gap</span>: <span class="str">8px</span>;
+  <span class="attr">flex-wrap</span>: <span class="str">wrap</span>;
+}
+
+<span class="tag">#cover-page</span> {
+  <span class="attr">display</span>: <span class="str">flex</span>;
+  <span class="attr">flex-direction</span>: <span class="str">column</span>;
+  <span class="attr">align-items</span>: <span class="str">center</span>;
+  <span class="attr">justify-content</span>: <span class="str">center</span>;
+}</div>
+
+      <h3 class="section-heading">💡 ポイント解説</h3>
+
+      <div class="point-card">
+        <div class="point-title">1. display: flex で「並べるモード」に</div>
+        <div class="point-body">
+          親要素に <code class="inline">display: flex</code> を書くと、<strong>その中の子要素が一列に並ぶ</strong>ようになります。これがflexレイアウトのスタート。何もしないとデフォルトは「横並び」です。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">2. flex-direction で並ぶ向きを決める</div>
+        <div class="point-body">
+          <code class="inline">row</code>（デフォルト）＝<strong>横並び</strong>。<br>
+          <code class="inline">column</code>＝<strong>縦並び</strong>。<br>
+          このアプリの <code class="inline">body</code> は <code class="inline">column</code> なので、ヘッダー・本・フッターが縦に積まれています。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">3. justify-content（主軸の揃え方）</div>
+        <div class="point-body">
+          並ぶ方向（主軸）に対する位置決め。<code class="inline">flex-start</code>（左／上寄せ）、<code class="inline">center</code>（中央）、<code class="inline">flex-end</code>（右／下寄せ）、<code class="inline">space-between</code>（両端寄せ均等配置）など。<strong>「並んでる方向の中で、どこに寄せるか」</strong>を決めます。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">4. align-items（交差軸の揃え方）</div>
+        <div class="point-body">
+          並ぶ方向と<strong>直角の方向</strong>での揃え方。<code class="inline">flex-direction: column</code>（縦並び）なら、左右の揃えを決めるのが <code class="inline">align-items</code>。<code class="inline">center</code> で中央揃え、<code class="inline">stretch</code> で幅いっぱい。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">5. gap で要素間の隙間</div>
+        <div class="point-body">
+          <code class="inline">gap: 8px</code> で<strong>子要素同士の隙間を一括指定</strong>。昔は <code class="inline">margin</code> で頑張っていた部分が gap でとても楽になりました。<code class="inline">flex-wrap: wrap</code> は「入りきらなかったら次の行に折り返す」指定。
+        </div>
+      </div>
+
+      <h3 class="section-heading">🗂 まとめ：flexの早見表</h3>
+      <table class="info-table">
+        <tr><th>プロパティ</th><th>役割</th></tr>
+        <tr><td>display: flex</td><td>並べるモードに切り替える</td></tr>
+        <tr><td>flex-direction</td><td>row（横） / column（縦）</td></tr>
+        <tr><td>justify-content</td><td>並ぶ向きの揃え（主軸）</td></tr>
+        <tr><td>align-items</td><td>直角方向の揃え（交差軸）</td></tr>
+        <tr><td>gap</td><td>要素同士の隙間</td></tr>
+      </table>
+
+      <p class="description" style="margin-top:14px">
+        flexは<strong>「親に display: flex、向きを決めて、揃え方を決める」</strong>の3ステップ。これだけでだいたいのレイアウトは組めるようになります。
+      </p>
+    `,
+    questions: [
+      {
+        q: '<code class="inline">display: flex</code>は、どこに書いて、何を起こすプロパティですか？',
+        options: [
+          "子要素に書くと、その要素が太字になる",
+          "親要素に書くと、その中の子要素が一列に並ぶ",
+          "ページ全体に書くと、ページがアニメーションで動き出す",
+          "何に書いても効果はなく、CSSの飾り"
+        ],
+        answer: 1,
+        explain: "<code class='inline'>display: flex</code>は<strong>親要素</strong>に書きます。これで中の子要素がフレックスアイテムとして一列に並ぶようになります。"
+      },
+      {
+        q: '<code class="inline">flex-direction: column</code>はどんな並び方ですか？',
+        options: [
+          "横並び（左から右）",
+          "縦並び（上から下）",
+          "斜め45度の並び",
+          "ランダムにバラバラ"
+        ],
+        answer: 1,
+        explain: "<code class='inline'>row</code>が横並び（デフォルト）、<code class='inline'>column</code>が縦並び。columnは「列」、つまり縦方向です。"
+      },
+      {
+        q: 'flexで「主軸方向の位置」を決めるプロパティはどれですか？',
+        options: [
+          "<code class='inline'>align-items</code>",
+          "<code class='inline'>justify-content</code>",
+          "<code class='inline'>flex-wrap</code>",
+          "<code class='inline'>gap</code>"
+        ],
+        answer: 1,
+        explain: "<code class='inline'>justify-content</code>は<strong>主軸（並ぶ向き）</strong>の揃え方。<code class='inline'>align-items</code>は<strong>交差軸（直角方向）</strong>の揃え方。セットで覚えましょう。"
+      },
+      {
+        q: '<code class="inline">gap: 8px</code>を flex の親に書くとどうなりますか？',
+        options: [
+          "親要素の周りに8pxの余白ができる",
+          "子要素同士の間に8pxの隙間ができる",
+          "全ての子要素のサイズが8pxになる",
+          "ページ全体が8pxずれる"
+        ],
+        answer: 1,
+        explain: "<code class='inline'>gap</code>は<strong>子要素同士の隙間</strong>を一括指定するプロパティ。横並びでも縦並びでもこれ一つで済みます。"
+      },
+      {
+        q: '<code class="inline">flex-wrap: wrap</code>はどんな効果がありますか？',
+        options: [
+          "子要素を全部一列に詰め込む",
+          "子要素の幅を必ず100%にする",
+          "子要素が入りきらなくなったら次の行に折り返す",
+          "子要素を点滅させる"
+        ],
+        answer: 2,
+        explain: "<code class='inline'>flex-wrap: wrap</code>は<strong>「入らなかったら次の行に回す」</strong>指定。デフォルト（nowrap）だと無理やり1行に詰め込まれて、はみ出したり縮められたりします。"
+      }
+    ]
+  },
+  {
+    id: 6,
+    title: "CSSの装飾（gradient、shadow）",
+    available: true,
+    body: `
+      <div class="day-label">Day 6 / 10</div>
+      <h2 class="entry-title">CSSの装飾（gradient、shadow）</h2>
+
+      <h3 class="section-heading">📚 今日のテーマ</h3>
+      <p class="description">
+        このアプリの「本っぽさ」「重厚な雰囲気」は、<strong>グラデーション（gradient）と影（shadow）の組み合わせ</strong>で作られています。今日はその仕掛けを読み解きます。
+      </p>
+
+      <h3 class="section-heading">📝 今日読むコード</h3>
+      <div class="code-block"><span class="tag">body</span> {
+  <span class="attr">background</span>: <span class="str">radial-gradient(ellipse at top, #2a1a10 0%, #111 100%)</span>;
+}
+
+<span class="tag">#cover-page</span> {
+  <span class="attr">background</span>: <span class="str">linear-gradient(145deg, #1E0F08 0%, #3D2010 35%, #2C1810 60%, #1A0C06 100%)</span>;
+}
+
+<span class="tag">.book</span> {
+  <span class="attr">box-shadow</span>:
+    <span class="str">-8px 0 20px rgba(0,0,0,0.6)</span>,
+    <span class="str">0 16px 48px rgba(0,0,0,0.7)</span>,
+    <span class="str">inset -3px 0 10px rgba(0,0,0,0.25)</span>;
+}
+
+<span class="tag">.cover-title</span> {
+  <span class="attr">text-shadow</span>: <span class="str">0 2px 8px rgba(0,0,0,0.5), 0 0 20px rgba(218,165,32,0.2)</span>;
+}</div>
+
+      <h3 class="section-heading">💡 ポイント解説</h3>
+
+      <div class="point-card">
+        <div class="point-title">1. linear-gradient は「直線方向の色変化」</div>
+        <div class="point-body">
+          <code class="inline">linear-gradient(145deg, 色1, 色2, ...)</code> の形。<strong>最初の値が角度</strong>（0deg＝下から上、90deg＝左から右、180deg＝上から下）。色は何個でも並べられて、<code class="inline">35%</code>のように位置を指定できます。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">2. radial-gradient は「中心から外側への色変化」</div>
+        <div class="point-body">
+          <code class="inline">radial-gradient(ellipse at top, 色1, 色2)</code>。<strong>at top</strong> で中心が上にずれた楕円のグラデーション。スポットライトのような光の表現に使います。このアプリの背景の「上が明るくて下に行くほど暗い」のはこれ。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">3. box-shadow は「箱の影」</div>
+        <div class="point-body">
+          <code class="inline">box-shadow: X Y ぼかし 色</code> の順。<br>
+          <code class="inline">-8px 0 20px rgba(0,0,0,0.6)</code> は<strong>左に8px、上下0、ぼかし20px、半透明の黒</strong>。これで本の左側に影ができ、立体的に見えます。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">4. inset は「内側の影」</div>
+        <div class="point-body">
+          <code class="inline">box-shadow</code> の値の頭に <code class="inline">inset</code> を付けると<strong>内側に影</strong>が落ちます。本の背表紙の「凹んだ感じ」はこれで作られています。普通の影と組み合わせると質感が一気に増します。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">5. カンマ区切りで影もグラデーションも重ねられる</div>
+        <div class="point-body">
+          <code class="inline">box-shadow</code> も <code class="inline">background</code> も、<strong>カンマで区切って何重にも重ね掛け</strong>できます。タイトル文字の <code class="inline">text-shadow</code> も「黒い影」と「金色の光」の2層を重ねて、ふわっと光るような効果を作っています。
+        </div>
+      </div>
+
+      <h3 class="section-heading">🗂 まとめ：装飾プロパティの使い分け</h3>
+      <table class="info-table">
+        <tr><th>プロパティ</th><th>用途</th></tr>
+        <tr><td>linear-gradient</td><td>直線的なグラデーション</td></tr>
+        <tr><td>radial-gradient</td><td>中心から放射状のグラデーション</td></tr>
+        <tr><td>box-shadow</td><td>要素の外（または内）側の影</td></tr>
+        <tr><td>text-shadow</td><td>文字の影／光彩</td></tr>
+        <tr><td>カンマ区切り</td><td>影もグラデも何重にも重ねられる</td></tr>
+      </table>
+
+      <p class="description" style="margin-top:14px">
+        派手な装飾は<strong>「グラデーションで色の奥行きを作り、影で立体感を作る」</strong>の合わせ技でできています。1つずつ分解して読めば、複雑そうに見えるCSSも怖くありません。
+      </p>
+    `,
+    questions: [
+      {
+        q: '<code class="inline">linear-gradient(145deg, #1E0F08 0%, #2C1810 60%)</code>の「145deg」は何を表していますか？',
+        options: [
+          "色の濃さ",
+          "グラデーションの角度（向き）",
+          "アニメーションの速度",
+          "色の数"
+        ],
+        answer: 1,
+        explain: "<code class='inline'>linear-gradient</code>の最初の値は<strong>角度</strong>。0degが下から上、90degが左から右、145degは斜めです。"
+      },
+      {
+        q: 'radial-gradient と linear-gradient の違いは何ですか？',
+        options: [
+          "radialは丸い形、linearは四角い形に色がつく",
+          "radialは中心から外側へ放射状、linearは直線方向に色が変化する",
+          "radialはJavaScriptが必要、linearはCSSだけで使える",
+          "違いはなく、どちらも同じ結果になる"
+        ],
+        answer: 1,
+        explain: "radial＝放射状（中心から外へ）、linear＝直線方向。スポットライトのような効果はradial、面に方向性を持たせたいときはlinearが向いています。"
+      },
+      {
+        q: '<code class="inline">box-shadow: -8px 0 20px rgba(0,0,0,0.6);</code>の各値の意味として正しいのは？',
+        options: [
+          "色 / X / Y / ぼかし",
+          "X / Y / ぼかし / 色",
+          "ぼかし / X / Y / 色",
+          "X / Y / 色 / ぼかし"
+        ],
+        answer: 1,
+        explain: "<code class='inline'>box-shadow</code>の基本順序は <strong>「Xずらし → Yずらし → ぼかし → 色」</strong>。さらに「広がり（spread）」を入れる4つ値もありますが、基本は4つで覚えておけばOK。"
+      },
+      {
+        q: '<code class="inline">box-shadow</code>に<code class="inline">inset</code>を付けるとどうなりますか？',
+        options: [
+          "影が外側ではなく内側に落ちる",
+          "影が点滅するアニメーションになる",
+          "影が要素全体を包み込む",
+          "影が消えて何も表示されなくなる"
+        ],
+        answer: 0,
+        explain: "<code class='inline'>inset</code>は「内側」の影。窪みや凹みのような表現に使います。普通の外側の影と組み合わせると質感が増します。"
+      },
+      {
+        q: '<code class="inline">box-shadow</code>を「黒い大きな影＋少し小さい影」のように2つ重ねたいときの書き方として正しいのは？',
+        options: [
+          "<code class='inline'>box-shadow</code>を2行書く",
+          "値をカンマ（,）で区切って並べる",
+          "値の間に<code class='inline'>+</code>を入れる",
+          "<code class='inline'>box-shadow-2</code>という別プロパティを使う"
+        ],
+        answer: 1,
+        explain: "<code class='inline'>box-shadow</code>も<code class='inline'>background</code>も<code class='inline'>text-shadow</code>も、<strong>カンマで区切ると何重にも重ねられます</strong>。同じプロパティに2行書くと後の行が前の行を上書きしてしまうので注意。"
+      }
+    ]
+  },
+  {
+    id: 7,
+    title: "CSSの疑似要素（::before, ::after）",
+    available: true,
+    body: `
+      <div class="day-label">Day 7 / 10</div>
+      <h2 class="entry-title">CSSの疑似要素（::before, ::after）</h2>
+
+      <h3 class="section-heading">📚 今日のテーマ</h3>
+      <p class="description">
+        HTMLには書かれていないのに、画面に何かが見えている――そんな仕掛けを作るのが <code class="inline">::before</code> と <code class="inline">::after</code>。<strong>CSSだけで作る「見えない子要素」</strong>です。今日は表紙の二重枠を例に読み解きます。
+      </p>
+
+      <h3 class="section-heading">📝 今日読むコード</h3>
+      <div class="code-block"><span class="tag">#cover-page::before</span> {
+  <span class="attr">content</span>: <span class="str">''</span>;
+  <span class="attr">position</span>: <span class="str">absolute</span>;
+  <span class="attr">top</span>: <span class="str">24px</span>; <span class="attr">left</span>: <span class="str">24px</span>;
+  <span class="attr">right</span>: <span class="str">24px</span>; <span class="attr">bottom</span>: <span class="str">24px</span>;
+  <span class="attr">border</span>: <span class="str">1px solid rgba(218,165,32,0.25)</span>;
+  <span class="attr">pointer-events</span>: <span class="str">none</span>;
+}
+
+<span class="tag">#cover-page::after</span> {
+  <span class="attr">content</span>: <span class="str">''</span>;
+  <span class="attr">position</span>: <span class="str">absolute</span>;
+  <span class="attr">top</span>: <span class="str">28px</span>; <span class="attr">left</span>: <span class="str">28px</span>;
+  <span class="attr">right</span>: <span class="str">28px</span>; <span class="attr">bottom</span>: <span class="str">28px</span>;
+  <span class="attr">border</span>: <span class="str">1px solid rgba(218,165,32,0.10)</span>;
+}</div>
+
+      <h3 class="section-heading">💡 ポイント解説</h3>
+
+      <div class="point-card">
+        <div class="point-title">1. ::before / ::after は「仮想の子要素」</div>
+        <div class="point-body">
+          HTMLには書かれていないのに、CSSが<strong>その要素の中の最初（before）と最後（after）に空っぽの要素を作ってくれる</strong>機能。装飾を増やしたいけどHTMLは汚したくない、というときに使います。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">2. content: '' が必須</div>
+        <div class="point-body">
+          疑似要素は<strong><code class="inline">content</code> プロパティを書かないと表示されません</strong>。中身が空でも <code class="inline">content: ''</code>（空文字）が必要。これは「ここに仮想の要素を作るぞ」という宣言の役割です。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">3. position: absolute で位置決め</div>
+        <div class="point-body">
+          <code class="inline">position: absolute</code> ＋ <code class="inline">top/left/right/bottom</code> の組み合わせで、<strong>親の中の好きな位置に置ける</strong>ようになります。<code class="inline">top:24px; bottom:24px</code> のように上下を指定すると、その分だけ縮んだ枠ができます。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">4. 枠線・線・装飾に使える</div>
+        <div class="point-body">
+          このアプリの表紙の<strong>金色の二重枠</strong>は <code class="inline">::before</code>（外側の枠）と <code class="inline">::after</code>（内側の枠）で作られています。HTMLは <code class="inline">&lt;div id="cover-page"&gt;</code> 1個なのに、見た目は3層構造。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">5. pointer-events: none で操作の邪魔をしない</div>
+        <div class="point-body">
+          疑似要素は本物の要素のように画面の上にかぶさるので、放っておくとクリックを横取りすることがあります。<code class="inline">pointer-events: none</code> を書くと<strong>「あるけどクリックは透明」</strong>になり、下のボタンが押せるようになります。
+        </div>
+      </div>
+
+      <h3 class="section-heading">🗂 まとめ：疑似要素のレシピ</h3>
+      <div class="tree-block">セレクタ::before {
+  content: '';            ← 必須！空でも書く
+  position: absolute;     ← 親の中の好きな位置に
+  top/left/right/bottom;  ← 位置を指定
+  border / background;    ← 装飾
+  pointer-events: none;   ← クリックを邪魔しない
+}</div>
+
+      <p class="description" style="margin-top:14px">
+        <code class="inline">::before</code> と <code class="inline">::after</code> は<strong>「HTMLを増やさずに装飾だけ盛りたい」</strong>ときの強い味方。コロン2つ（<code class="inline">::</code>）で疑似要素、コロン1つ（<code class="inline">:hover</code>等）は疑似クラス、と覚えておくと混乱しません。
+      </p>
+    `,
+    questions: [
+      {
+        q: '<code class="inline">::before</code>と<code class="inline">::after</code>の役割として正しいのはどれですか？',
+        options: [
+          "ページの読み込み前後にアニメーションを入れる",
+          "要素の中に「仮想の子要素」をCSSだけで作り出す",
+          "JavaScriptの実行順序を制御する",
+          "別のページに飛ばすリンクを作る"
+        ],
+        answer: 1,
+        explain: "<code class='inline'>::before</code>と<code class='inline'>::after</code>は<strong>疑似要素</strong>。HTMLを書き換えなくても、CSSだけで「中身の最初／最後」に空の要素を追加したことにできます。"
+      },
+      {
+        q: '<code class="inline">::before</code>を画面に表示させるために、絶対に書かないといけないプロパティはどれですか？',
+        options: [
+          "<code class='inline'>color</code>",
+          "<code class='inline'>display</code>",
+          "<code class='inline'>content</code>",
+          "<code class='inline'>z-index</code>"
+        ],
+        answer: 2,
+        explain: "<code class='inline'>content</code>プロパティは疑似要素の必須項目。中身が空でも<code class='inline'>content: ''</code>と書かないと表示されません。"
+      },
+      {
+        q: '<code class="inline">position: absolute; top: 24px; left: 24px; right: 24px; bottom: 24px;</code>と書いた疑似要素はどうなりますか？',
+        options: [
+          "親要素の左上に固定で24px×24pxの正方形ができる",
+          "親要素の四方から24pxずつ内側に縮んだ大きさになる",
+          "ページの絶対座標(24, 24)に置かれる",
+          "親要素を覆い尽くす"
+        ],
+        answer: 1,
+        explain: "top/left/right/bottomを全方向に指定すると、その分だけ親から内側に縮んだ位置と大きさで配置されます。これで「内側の枠」のような表現ができます。"
+      },
+      {
+        q: '<code class="inline">pointer-events: none</code>を疑似要素に書く理由として正しいのは？',
+        options: [
+          "疑似要素を画面から隠すため",
+          "疑似要素がクリックを横取りせず、下のボタンを押せるようにするため",
+          "疑似要素のアニメーションを止めるため",
+          "疑似要素を一定時間後に削除するため"
+        ],
+        answer: 1,
+        explain: "疑似要素は他の要素の上にかぶさるので、放っておくとクリックを奪ってしまうことがあります。<code class='inline'>pointer-events: none</code>で「あるけどクリック透明」にして、下の本物のボタンが反応するようにします。"
+      },
+      {
+        q: 'コロンの数で疑似要素と疑似クラスを見分ける書き方として、正しいのはどれですか？',
+        options: [
+          "コロン1つ <code class='inline'>:</code> が疑似要素、コロン2つ <code class='inline'>::</code> が疑似クラス",
+          "コロン1つ <code class='inline'>:</code> が疑似クラス（<code class='inline'>:hover</code>等）、コロン2つ <code class='inline'>::</code> が疑似要素（<code class='inline'>::before</code>等）",
+          "どちらも同じで違いはない",
+          "コロンの数は意味がなく、好きに書ける"
+        ],
+        answer: 1,
+        explain: "新しいCSSの仕様では「<code class='inline'>:hover</code>などの疑似クラスはコロン1つ」「<code class='inline'>::before</code>などの疑似要素はコロン2つ」と区別します。意味が違うので、コロンの数で「これは何か」が分かります。"
+      }
+    ]
+  },
+  {
+    id: 8,
+    title: "JavaScript①関数とは",
+    available: true,
+    body: `
+      <div class="day-label">Day 8 / 10</div>
+      <h2 class="entry-title">JavaScript①関数とは</h2>
+
+      <h3 class="section-heading">📚 今日のテーマ</h3>
+      <p class="description">
+        ここからはJavaScript（動きをつける言語）。最初の関門が<strong>関数（function）</strong>です。<code class="inline">function 名前(引数) { ... }</code> の形で書かれた「やることをひとまとめにした箱」。今日はこの読み方を身につけます。
+      </p>
+
+      <h3 class="section-heading">📝 今日読むコード</h3>
+      <div class="code-block"><span class="comment">// 日付文字列から週番号を計算する関数</span>
+<span class="tag">function</span> <span class="attr">getWeekNum</span>(dateStr) {
+  <span class="tag">const</span> d = <span class="tag">new</span> Date(dateStr);
+  <span class="comment">// 計算処理...</span>
+  <span class="tag">return</span> weekNumber;
+}
+
+<span class="comment">// 日付の表示形式を整える関数</span>
+<span class="tag">function</span> <span class="attr">fmtDate</span>(s) {
+  <span class="tag">return</span> s.replace(<span class="str">/-/g</span>, <span class="str">'/'</span>);
+}
+
+<span class="comment">// 関数を「呼び出す」</span>
+<span class="tag">const</span> week = <span class="attr">getWeekNum</span>(<span class="str">'2026-04-29'</span>);
+<span class="tag">const</span> shown = <span class="attr">fmtDate</span>(<span class="str">'2026-04-29'</span>); <span class="comment">// → '2026/04/29'</span></div>
+
+      <h3 class="section-heading">💡 ポイント解説</h3>
+
+      <div class="point-card">
+        <div class="point-title">1. function は「やることの箱」</div>
+        <div class="point-body">
+          <code class="inline">function 名前() { ... }</code> は<strong>「ここからここまでをまとめて、名前で呼べるようにする」</strong>仕組み。同じ処理を何度も書かずに済ませる、というのが一番の動機です。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">2. 引数（カッコの中）は「材料」</div>
+        <div class="point-body">
+          <code class="inline">function fmtDate(s)</code> の <code class="inline">s</code> が<strong>引数</strong>。「これを材料にして処理してね」と外から渡す値です。<code class="inline">fmtDate('2026-04-29')</code> と呼ぶと、<code class="inline">s</code> の中身は <code class="inline">'2026-04-29'</code> になります。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">3. return は「結果を返す」</div>
+        <div class="point-body">
+          <code class="inline">return ...</code> は<strong>「呼び出した側に結果を渡す」</strong>命令。<code class="inline">return</code>がない関数は何も返しません（undefined）。<code class="inline">return</code>があると、その値が <code class="inline">const week = getWeekNum(...)</code> の右辺になります。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">4. 名前() で呼び出す</div>
+        <div class="point-body">
+          関数は宣言しただけでは動きません。<strong>呼び出して初めて中身が実行されます</strong>。<code class="inline">getWeekNum('2026-04-29')</code> のようにカッコ付きで書くと、その瞬間に箱の中身が動きます。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">5. 関数を分けると読みやすくなる</div>
+        <div class="point-body">
+          1つの大きな処理を、<strong>「日付を整える」「週番号を出す」「画面に表示する」</strong>のように小さな関数に分けると、コードが読みやすくなります。1つの関数は<strong>1つの仕事だけ</strong>に絞るのが上手な書き方のコツ。
+        </div>
+      </div>
+
+      <h3 class="section-heading">🗂 まとめ：関数の文法</h3>
+      <div class="tree-block">function 名前(引数1, 引数2, ...) {
+  ▼ ここに処理を書く
+  return 結果;     ← 呼び出した側に値を返す
+}
+
+▼ 呼び出し
+const x = 名前(値1, 値2);
+              ↑ 引数として渡す
+        ↑ return された値が x に入る</div>
+
+      <p class="description" style="margin-top:14px">
+        関数は<strong>「材料（引数）→ 処理 → 結果（return）」</strong>の3点セットで読み解けます。長いコードも、関数の頭だけ拾えば「何をする箱が並んでいるのか」が見えてきます。
+      </p>
+    `,
+    questions: [
+      {
+        q: 'JavaScriptの関数（function）について、正しい説明はどれですか？',
+        options: [
+          "ページに表示される文章のかたまり",
+          "処理を1つの名前でまとめて、何度でも呼び出せるようにする仕組み",
+          "ページの色を一括で変える命令",
+          "ファイルを保存するためのCSS機能"
+        ],
+        answer: 1,
+        explain: "関数は「やることをまとめた箱」。一度書けば何度でも、別の場所からでも呼び出して使えます。"
+      },
+      {
+        q: '<code class="inline">function fmtDate(s) { ... }</code>の <code class="inline">s</code> は何と呼ばれますか？',
+        options: [
+          "戻り値",
+          "引数（関数に渡される材料）",
+          "クラス名",
+          "コメント"
+        ],
+        answer: 1,
+        explain: "カッコの中の名前は<strong>引数（パラメータ）</strong>。関数を呼ぶときに渡された値が、この名前で関数の中で使えるようになります。"
+      },
+      {
+        q: '関数の中で<code class="inline">return</code>を書く理由として正しいのはどれですか？',
+        options: [
+          "関数の中で計算した結果を、呼び出した側に渡すため",
+          "関数を強制的に削除するため",
+          "関数の名前を変更するため",
+          "関数を別のファイルに保存するため"
+        ],
+        answer: 0,
+        explain: "<code class='inline'>return</code>は「結果を返す」命令。<code class='inline'>const x = fmtDate(...)</code>のとき、return された値が<code class='inline'>x</code>に入ります。returnがない関数の戻り値は<code class='inline'>undefined</code>です。"
+      },
+      {
+        q: '<code class="inline">function getWeekNum(dateStr) { ... }</code>と書いただけで、関数の中身は実行されますか？',
+        options: [
+          "はい、書いた瞬間に1回実行される",
+          "はい、ページが読み込まれるたびに自動で実行される",
+          "いいえ、宣言しただけでは実行されない。<code class='inline'>getWeekNum(...)</code>のように呼び出して初めて動く",
+          "いいえ、JavaScriptの関数は永遠に実行されない"
+        ],
+        answer: 2,
+        explain: "関数は<strong>宣言（定義）と呼び出しが別</strong>。書いた時点では「箱を作っただけ」で、カッコ付きで呼び出して初めて中身が動きます。"
+      },
+      {
+        q: '<code class="inline">const result = fmtDate(\'2026-04-29\');</code>を実行したとき、<code class="inline">result</code>に入るのは何ですか？',
+        options: [
+          "関数自体（function）",
+          "<code class='inline'>fmtDate</code>という文字列",
+          "<code class='inline'>fmtDate</code>関数が <code class='inline'>return</code> した値",
+          "何も入らない（undefined）"
+        ],
+        answer: 2,
+        explain: "<code class='inline'>関数名(引数)</code>の形で呼び出すと、<strong>関数の中で<code class='inline'>return</code>された値</strong>がその式の値になります。それが<code class='inline'>result</code>に代入されます。"
+      }
+    ]
+  },
+  {
+    id: 9,
+    title: "JavaScript②DOM操作",
+    available: true,
+    body: `
+      <div class="day-label">Day 9 / 10</div>
+      <h2 class="entry-title">JavaScript②DOM操作</h2>
+
+      <h3 class="section-heading">📚 今日のテーマ</h3>
+      <p class="description">
+        JavaScriptの主な仕事は<strong>「画面の要素を見つける」「中身を書き換える」「クリックされたら何かする」</strong>の3つ。これを<strong>DOM操作</strong>と呼びます。今日はその基本パターンを読みます。
+      </p>
+
+      <h3 class="section-heading">📝 今日読むコード</h3>
+      <div class="code-block"><span class="comment">// 1. 要素を見つける</span>
+<span class="tag">const</span> list = <span class="attr">document.getElementById</span>(<span class="str">'toc-list'</span>);
+
+<span class="comment">// 2. 中身を書き換える</span>
+list.<span class="attr">innerHTML</span> = days.<span class="attr">map</span>(day =&gt; <span class="str">\`&lt;li&gt;\${day.title}&lt;/li&gt;\`</span>).<span class="attr">join</span>(<span class="str">''</span>);
+
+<span class="comment">// 3. クリックされたら何かする</span>
+<span class="attr">document.querySelectorAll</span>(<span class="str">'.toc-item'</span>).<span class="attr">forEach</span>(el =&gt; {
+  el.<span class="attr">addEventListener</span>(<span class="str">'click'</span>, () =&gt; {
+    <span class="attr">goToDay</span>(el.<span class="attr">dataset</span>.day);
+  });
+});</div>
+
+      <h3 class="section-heading">💡 ポイント解説</h3>
+
+      <div class="point-card">
+        <div class="point-title">1. document.getElementById('id') で要素を取得</div>
+        <div class="point-body">
+          <code class="inline">document</code> は<strong>このページ全体</strong>を指す変数。<code class="inline">.getElementById('toc-list')</code> で<strong>id="toc-list" の要素</strong>を1つだけ取得します。idは1ページに1つだけなので、これは「あの一個」を確実に取る方法です。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">2. .innerHTML で中身を書き換える</div>
+        <div class="point-body">
+          取得した要素に <code class="inline">.innerHTML = '...'</code> と代入すると、<strong>その要素の中身がまるごとそのHTMLに置き換わります</strong>。リストやカードを動的に作るときの基本テクニック。文字列としてHTMLを組み立てて差し込みます。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">3. querySelectorAll はCSSセレクタで複数取得</div>
+        <div class="point-body">
+          <code class="inline">document.querySelectorAll('.toc-item')</code> は<strong>クラス toc-item を持つ要素を全部取る</strong>。CSSのセレクタがそのまま使えるので便利です。<code class="inline">querySelector('.toc-item')</code>（Allなし）なら最初の1つだけ。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">4. addEventListener('click', 関数) でクリックを拾う</div>
+        <div class="point-body">
+          <code class="inline">addEventListener</code> は<strong>「○○されたら××する」</strong>の登録。第1引数がイベント名（'click', 'input', 'scroll' など）、第2引数が起きたときに動かす関数。HTML側に <code class="inline">onclick="..."</code> を書くのと同じことを、JS側からできます。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">5. forEach で複数要素に同じ処理</div>
+        <div class="point-body">
+          <code class="inline">querySelectorAll</code> で取った要素の集合に <code class="inline">.forEach(el =&gt; { ... })</code> を付けると<strong>1つずつ順番に処理</strong>できます。<code class="inline">el</code> はそのときの要素1個分。配列の繰り返し処理の定番です。
+        </div>
+      </div>
+
+      <h3 class="section-heading">🗂 まとめ：DOM操作の3ステップ</h3>
+      <table class="info-table">
+        <tr><th>やりたいこと</th><th>使う命令</th></tr>
+        <tr><td>要素を1つ取る（id指定）</td><td>document.getElementById('id')</td></tr>
+        <tr><td>要素を全部取る（CSSセレクタ）</td><td>document.querySelectorAll('.cls')</td></tr>
+        <tr><td>中身を書き換える</td><td>el.innerHTML = '...'</td></tr>
+        <tr><td>表示／非表示を切り替える</td><td>el.style.display = 'none' / 'block'</td></tr>
+        <tr><td>クリックを拾う</td><td>el.addEventListener('click', fn)</td></tr>
+      </table>
+
+      <p class="description" style="margin-top:14px">
+        DOM操作は<strong>「取って → 書き換える／反応させる」</strong>のリズム。Webアプリの動きの90%はこのパターンの繰り返しです。
+      </p>
+    `,
+    questions: [
+      {
+        q: '<code class="inline">document.getElementById(\'toc-list\')</code>は何をする命令ですか？',
+        options: [
+          "ページのタイトルを変更する",
+          "id属性が \'toc-list\' の要素を1つ取得する",
+          "id属性が \'toc-list\' の要素を削除する",
+          "新しい要素を作って追加する"
+        ],
+        answer: 1,
+        explain: "<code class='inline'>document.getElementById('xxx')</code>は<strong>id=\'xxx\'の要素を取ってくる</strong>命令。idはページに1つだけなので、必ず1つの要素が返ります（なければnull）。"
+      },
+      {
+        q: '<code class="inline">el.innerHTML = \'&lt;li&gt;新しい項目&lt;/li&gt;\'</code>を実行するとどうなりますか？',
+        options: [
+          "el の隣に新しい要素が追加される",
+          "el の中身が、指定したHTMLにまるごと書き換わる",
+          "el が削除される",
+          "el の文字色が変わる"
+        ],
+        answer: 1,
+        explain: "<code class='inline'>.innerHTML</code>は要素の<strong>中身（中のHTML）</strong>を表すプロパティ。代入すると、それまでの中身は捨てられて新しいHTMLに置き換わります。"
+      },
+      {
+        q: '<code class="inline">document.querySelectorAll(\'.toc-item\')</code>と<code class="inline">document.querySelector(\'.toc-item\')</code>の違いは？',
+        options: [
+          "前者は1つだけ、後者は全部取る",
+          "前者は全部取る、後者は最初の1つだけ取る",
+          "前者はクラス、後者はIDで取る",
+          "どちらも全く同じで違いはない"
+        ],
+        answer: 1,
+        explain: "<code class='inline'>querySelectorAll</code>はマッチする<strong>全要素</strong>（NodeList）、<code class='inline'>querySelector</code>は<strong>最初の1つ</strong>だけを返します。"
+      },
+      {
+        q: '<code class="inline">btn.addEventListener(\'click\', myFunc)</code>の効果として正しいのは？',
+        options: [
+          "btnを画面から削除する",
+          "btnの色をクリック時に変える（CSSの効果）",
+          "btnがクリックされたとき、myFunc という関数を実行する",
+          "btnを強制的にクリックする"
+        ],
+        answer: 2,
+        explain: "<code class='inline'>addEventListener</code>は<strong>「○○イベントが起きたら、この関数を呼んで」と登録する命令</strong>。第1引数がイベント名、第2引数が呼ばれる関数です。"
+      },
+      {
+        q: '<code class="inline">document.querySelectorAll(\'.item\').forEach(el =&gt; { ... })</code>の意味として正しいのは？',
+        options: [
+          "クラスitemを持つ要素のうち最初の1つだけに処理を行う",
+          "クラスitemを持つ要素を1つずつ順番に取り出して、それぞれに同じ処理を行う",
+          "クラスitemを持つ要素を全て削除する",
+          "新しいクラスitemを持つ要素を作る"
+        ],
+        answer: 1,
+        explain: "<code class='inline'>forEach</code>は<strong>「集まりを1つずつ順番に処理する」</strong>命令。<code class='inline'>el</code>にそのときの要素が入るので、ループ的にそれぞれにイベント登録などができます。"
+      }
+    ]
+  },
+  {
+    id: 10,
+    title: "総まとめ＋実際の画面との対応づけ",
+    available: true,
+    body: `
+      <div class="day-label">Day 10 / 10</div>
+      <h2 class="entry-title">総まとめ＋実際の画面との対応づけ</h2>
+
+      <h3 class="section-heading">📚 今日のテーマ</h3>
+      <p class="description">
+        最終日。Day1〜9で読んできたHTML・CSS・JavaScriptが、<strong>実際の画面のどこに対応しているか</strong>を頭の中で結びつけられれば卒業です。同じ部品を3つの言語の視点で読み直します。
+      </p>
+
+      <h3 class="section-heading">📝 今日読むコード</h3>
+      <div class="code-block"><span class="comment">&lt;!-- ① HTML：骨組み --&gt;</span>
+<span class="tag">&lt;header</span> <span class="attr">class</span>=<span class="str">"app-header"</span> <span class="attr">onclick</span>=<span class="str">"openBook()"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;h1&gt;</span>📔 週刊 AIノート<span class="tag">&lt;/h1&gt;</span>
+<span class="tag">&lt;/header&gt;</span>
+
+<span class="comment">/* ② CSS：見た目 */</span>
+<span class="tag">.app-header</span> {
+  <span class="attr">color</span>: <span class="str">var(--gold-light)</span>;
+  <span class="attr">font-family</span>: <span class="str">'Klee One', cursive</span>;
+  <span class="attr">cursor</span>: <span class="str">pointer</span>;
+}
+
+<span class="comment">// ③ JavaScript：動き</span>
+<span class="tag">function</span> <span class="attr">openBook</span>() {
+  <span class="attr">document.getElementById</span>(<span class="str">'cover-page'</span>).<span class="attr">style</span>.<span class="attr">display</span> = <span class="str">'none'</span>;
+  <span class="attr">document.getElementById</span>(<span class="str">'contents-page'</span>).<span class="attr">style</span>.<span class="attr">display</span> = <span class="str">'block'</span>;
+}</div>
+
+      <h3 class="section-heading">💡 ポイント解説</h3>
+
+      <div class="point-card">
+        <div class="point-title">1. HTML＝骨組み（何があるか）</div>
+        <div class="point-body">
+          <code class="inline">&lt;header&gt;</code>＝<strong>「上部にヘッダー領域があるよ」</strong>という宣言。<code class="inline">&lt;h1&gt;</code> でタイトル文字。HTMLは<strong>「画面に何の部品が並ぶか」</strong>だけを書きます。色や動きはここには書きません。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">2. CSS＝見た目（どう見えるか）</div>
+        <div class="point-body">
+          <code class="inline">.app-header { color: ...; }</code> は<strong>「app-headerクラスの要素を金色にしてね」</strong>という指示。HTMLには色も並びも書かれていません。<strong>同じHTMLでもCSSを差し替えれば全く違う見た目</strong>にできるのがWebの面白さ。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">3. JavaScript＝動き（何が起きるか）</div>
+        <div class="point-body">
+          <code class="inline">openBook()</code> は<strong>「クリックされたら、表紙を消して目次を出す」</strong>関数。HTMLの <code class="inline">onclick="openBook()"</code> がトリガーで、JSがDOMを書き換えて画面が動きます。<strong>HTML→CSS→JSの順</strong>に「並ぶ→飾られる→動く」という3層構造です。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">4. localStorage＝データの保存場所</div>
+        <div class="point-body">
+          このアプリの「進捗」は <code class="inline">localStorage.setItem('aicr-progress-v1', ...)</code> でブラウザに保存されています。<strong>サーバなしでも値を覚えておける</strong>ので、ページを閉じてもデータが消えません。鍵（キー）と値（JSON文字列）のペアで保存します。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-title">5. PWA＝アプリ化（manifest.json + service-worker.js）</div>
+        <div class="point-body">
+          <code class="inline">manifest.json</code> はアプリ名・アイコン・テーマ色などの<strong>「アプリ情報カード」</strong>。<code class="inline">service-worker.js</code> はキャッシュ管理で<strong>「オフラインでも動かす」</strong>仕組み。この2つでWebサイトがスマホのホーム画面に追加できる「アプリ」になります。
+        </div>
+      </div>
+
+      <h3 class="section-heading">🗂 まとめ：3層モデル</h3>
+      <div class="tree-block">画面に見えるもの
+   ↑
+┌──────────────────────┐
+│ JavaScript（動き）    │ ← クリック、書き換え、保存
+├──────────────────────┤
+│ CSS（見た目）         │ ← 色、レイアウト、装飾
+├──────────────────────┤
+│ HTML（骨組み）        │ ← 何が並ぶか
+└──────────────────────┘
+        +
+   localStorage（保存）
+   manifest.json + sw.js（アプリ化）</div>
+
+      <p class="description" style="margin-top:14px">
+        画面のどこを指差しても<strong>「これはHTMLで置かれて、CSSで飾られて、JSで動いている」</strong>と分解して言えるようになれば、AIに任せたコードも自分のものとして読めるはずです。お疲れさまでした。
+      </p>
+    `,
+    questions: [
+      {
+        q: 'HTML・CSS・JavaScriptの役割の組み合わせとして正しいのはどれですか？',
+        options: [
+          "HTML＝動き、CSS＝骨組み、JS＝見た目",
+          "HTML＝骨組み、CSS＝見た目、JS＝動き",
+          "HTML＝見た目、CSS＝動き、JS＝骨組み",
+          "3つとも同じ役割で、どれを使ってもよい"
+        ],
+        answer: 1,
+        explain: "<strong>HTML＝骨組み（何があるか）、CSS＝見た目（どう見えるか）、JavaScript＝動き（何が起きるか）</strong>。Web開発の3層モデルの基本です。"
+      },
+      {
+        q: 'HTMLには <code class="inline">&lt;header class="app-header"&gt;</code> としか書かれていないのに、画面では金色の文字で表示されています。これはなぜですか？',
+        options: [
+          "HTMLには書かれていないが、CSSが <code class='inline'>.app-header { color: var(--gold-light); }</code> で色を指定しているから",
+          "ブラウザが自動的に金色にしてくれているから",
+          "JavaScriptが起動時に色を塗っているから",
+          "headerタグはデフォルトで金色になる仕様だから"
+        ],
+        answer: 0,
+        explain: "見た目はCSSが担当します。HTMLには「クラスがapp-header」とだけあり、CSS側で「app-headerクラスは金色」と指定することで色がつきます。<strong>HTMLとCSSは役割を完全に分けているのがポイント</strong>。"
+      },
+      {
+        q: '<code class="inline">&lt;header onclick="openBook()"&gt;</code>でヘッダーをクリックしたとき、JavaScriptの<code class="inline">openBook</code>関数の中で起きていることは？',
+        options: [
+          "ページ全体がリロードされる",
+          "DOMの一部の<code class='inline'>style.display</code>が書き換わって、表紙が消えて目次が表示される",
+          "サーバに通信してデータを取りに行く",
+          "ブラウザのタブが新しく開く"
+        ],
+        answer: 1,
+        explain: "<code class='inline'>document.getElementById(...).style.display = 'none'</code>のように、<strong>JavaScriptがDOM（要素）の見た目プロパティを書き換える</strong>ことで画面が切り替わっています。"
+      },
+      {
+        q: 'このアプリで「学習の進捗」がページを閉じても消えないのは、何の仕組みのおかげですか？',
+        options: [
+          "サーバにユーザーアカウントが登録されているから",
+          "<code class='inline'>localStorage</code>にブラウザ側で保存しているから",
+          "HTMLの中にデータが書き込まれているから",
+          "CSS変数として保存されているから"
+        ],
+        answer: 1,
+        explain: "<code class='inline'>localStorage</code>はブラウザに用意された<strong>「鍵と値で保存できる小さなデータ置き場」</strong>。サーバーがなくてもページを閉じても、値が残り続けます。"
+      },
+      {
+        q: '<code class="inline">manifest.json</code>と<code class="inline">service-worker.js</code>がそろうと、Webサイトはどう変わりますか？',
+        options: [
+          "ページの読み込みが必ず10倍速くなる",
+          "スマホのホーム画面に追加してアプリのように使えたり、オフラインでも開けるようになる（PWA化）",
+          "勝手にユーザーの個人情報を集められるようになる",
+          "デザインが自動的に最新風に変わる"
+        ],
+        answer: 1,
+        explain: "<code class='inline'>manifest.json</code>がアプリ情報（名前・アイコン・色など）、<code class='inline'>service-worker.js</code>がキャッシュ管理を担当。この2つが揃うとWebサイトが<strong>PWA（Progressive Web App）</strong>になり、ホーム画面追加とオフライン動作ができるようになります。"
+      }
+    ]
+  }
 ];
 
 /* ================================================================
